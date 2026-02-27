@@ -1,5 +1,3 @@
-# Hospital-Management-System
-Hospital Management System using Java
 # Hospital Management System (Java)
 
 This project is a simple Hospital Management System developed using Java.
