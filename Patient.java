@@ -1,15 +1,34 @@
+import java.sql.*;
+import java.util.Scanner;
+
 public class Patient {
 
-    int id;
-    String name;
-    int age;
+    public static void addPatient() {
+        Scanner sc = new Scanner(System.in);
 
-    Patient(int id, String name, int age) {
+        System.out.print("Name: ");
+        String name = sc.next();
+        System.out.print("Age: ");
+        int age = sc.nextInt();
+        System.out.print("Gender: ");
+        String gender = sc.next();
+        System.out.print("Disease: ");
+        String disease = sc.next();
 
-        this.id = id;
-        this.name = name;
-        this.age = age;
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                "INSERT INTO patients(name,age,gender,disease) VALUES(?,?,?,?)"
+            );
+            ps.setString(1, name);
+            ps.setInt(2, age);
+            ps.setString(3, gender);
+            ps.setString(4, disease);
+            ps.executeUpdate();
 
+            System.out.println("Patient Added Successfully!");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
-
 }
