@@ -1,102 +1,127 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HospitalManagement {
 
-    ArrayList<Patient> patients = new ArrayList<>();
-    ArrayList<Doctor> doctors = new ArrayList<>();
-ArrayList<Appointment> appointments = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
-    // Add Patient
-    public void addPatient() {
+    public static void main(String[] args) {
 
-        System.out.print("Enter Patient ID: ");
-        int id = sc.nextInt();
+        System.out.println("==================================");
+        System.out.println("   HOSPITAL MANAGEMENT SYSTEM   ");
+        System.out.println("==================================");
 
-        System.out.print("Enter Name: ");
-        String name = sc.next();
+        String role = Login.loginUser();
 
-        System.out.print("Enter Age: ");
-        int age = sc.nextInt();
-
-        Patient p = new Patient(id, name, age);
-
-        patients.add(p);
-
-        System.out.println("Patient Added Successfully");
-    }
-
-    // View Patients
-    public void viewPatients() {
-
-        for(Patient p : patients) {
-
-            System.out.println(p.id + " " + p.name + " " + p.age);
-
+        if (role == null) {
+            System.out.println("Invalid Login! Exiting...");
+            return;
         }
 
-    }
+        switch (role) {
+            case "Admin":
+                adminMenu();
+                break;
 
-    // Add Doctor
-    public void addDoctor() {
+            case "Doctor":
+                doctorMenu();
+                break;
 
-        System.out.print("Enter Doctor ID: ");
-        int id = sc.nextInt();
+            case "Receptionist":
+                receptionistMenu();
+                break;
 
-        System.out.print("Enter Doctor Name: ");
-        String name = sc.next();
-
-        System.out.print("Enter Specialization: ");
-        String spec = sc.next();
-
-        Doctor d = new Doctor(id, name, spec);
-
-        doctors.add(d);
-
-        System.out.println("Doctor Added Successfully");
-
-    }
-
-    // View Doctors
-    public void viewDoctors() {
-
-        for(Doctor d : doctors) {
-
-            System.out.println(d.id + " " + d.name + " " + d.specialization);
-
+            default:
+                System.out.println("Unauthorized Role!");
         }
-
     }
 
-public void bookAppointment() {
+    // ================= ADMIN MENU =================
+    public static void adminMenu() {
+        int choice;
 
-    System.out.print("Enter Patient ID: ");
-    int pid = sc.nextInt();
+        do {
+            System.out.println("\n--- ADMIN PANEL ---");
+            System.out.println("1. Add Patient");
+            System.out.println("2. Generate Bill");
+            System.out.println("3. Exit");
+            System.out.print("Enter Choice: ");
+            choice = sc.nextInt();
 
-    System.out.print("Enter Doctor ID: ");
-    int did = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    Patient.addPatient();
+                    break;
 
-    System.out.print("Enter Date: ");
-    String date = sc.next();
+                case 2:
+                    Billing.generateBill();
+                    break;
 
-    Appointment a = new Appointment(pid, did, date);
+                case 3:
+                    System.out.println("Exiting Admin Panel...");
+                    break;
 
-    appointments.add(a);
+                default:
+                    System.out.println("Invalid Choice!");
+            }
 
-    System.out.println("Appointment Booked Successfully");
-
-}
-public void viewAppointments() {
-
-    for(Appointment a : appointments) {
-
-        System.out.println(
-        "PatientID: " + a.patientId +
-        " DoctorID: " + a.doctorId +
-        " Date: " + a.date);
-
+        } while (choice != 3);
     }
 
-}
+    // ================= DOCTOR MENU =================
+    public static void doctorMenu() {
+        int choice;
+
+        do {
+            System.out.println("\n--- DOCTOR PANEL ---");
+            System.out.println("1. View Patients (Basic Demo)");
+            System.out.println("2. Exit");
+            System.out.print("Enter Choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Doctor can view patient records here.");
+                    break;
+
+                case 2:
+                    System.out.println("Exiting Doctor Panel...");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+
+        } while (choice != 2);
+    }
+//ReceptionMenu
+    public static void receptionistMenu() {
+        int choice;
+
+        do {
+            System.out.println("\n--- RECEPTIONIST PANEL ---");
+            System.out.println("1. Add Patient");
+            System.out.println("2. Book Appointment");
+            System.out.println("3. Exit");
+            System.out.print("Enter Choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    Patient.addPatient();
+                    break;
+
+                case 2:
+                    Appointment.bookAppointment();
+                    break;
+
+                case 3:
+                    System.out.println("Exiting Receptionist Panel...");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+
+        } while (choice != 3);
+    }
 }
