@@ -1,0 +1,6 @@
+public class Admin {
+    public static void menu() {
+        System.out.println("1. Add Patient");
+        Patient.addPatient();
+    }
+}
