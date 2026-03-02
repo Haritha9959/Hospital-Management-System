@@ -1,34 +1,29 @@
-# Hospital Management System (Java)
+ Hospital Management System
+ 
+About the Project
+Hospital Management System is a Java-based console application that helps manage hospital operations like patient registration, appointments, billing, and PDF invoice generation.
 
-This project is a simple Hospital Management System developed using Java.
+This project uses Java, JDBC, MySQL, and iText library.
 
-## Features
-- Add Patient
-- View Patients
-- Add Doctor
-- View Doctors
-- Book Appointment
+ Features
+- Role-Based Login (Admin, Doctor, Receptionist)
+- Add Patient Details
+- Book Appointments
+- Generate Bills
+- Automatic PDF Bill Generation
+- MySQL Database Integration
 
-## Technologies Used
+ Technologies Used
 - Java
-- OOP Concepts
+- JDBC
+- MySQL
+- iText (for PDF generation)
 
-## Files
-- Main.java
-- Patient.java
-- Doctor.java
-- Appointment.java
-- HospitalManagement.java
 
-## How to Run
 
-Compile:
+ Database Setup
 
-javac Main.java
-
-Run:
-
-java Main
-
-## Author
-Haritha
+Create Database
+sql
+CREATE DATABASE hospital_db;
+USE hospital_db;
